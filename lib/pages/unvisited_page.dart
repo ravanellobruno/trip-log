@@ -17,7 +17,7 @@ class UnvisitedPage extends StatefulWidget {
 class _UnvisitedPageState extends State<UnvisitedPage> {
   List<Place> places = [];
 
-  void _getPlaces() async {
+  Future<void> _getPlaces() async {
     try {
       final data = await PlacesRepo.getAll(PlaceTypeEnum.unvisited);
       setState(() => places = data);
@@ -41,10 +41,10 @@ class _UnvisitedPageState extends State<UnvisitedPage> {
       places: places,
       cardsParams: {
         'btnChild': const Text('Visitei', style: TextStyle(fontSize: 15)),
-        'onBtnPressed': (place) {
+        'onBtnPressed': (place) async {
           try {
-            PlacesRepo.move(PlaceTypeEnum.visited, place);
-            _getPlaces();
+            await PlacesRepo.move(PlaceTypeEnum.visited, place);
+            await _getPlaces();
 
             ToastUtils.showToast(
               'Registro movido para: ${PageEnum.visited.label}',
