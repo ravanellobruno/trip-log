@@ -1,5 +1,6 @@
 import 'db_ini.dart';
 import '../models/place_model.dart';
+import '../enums/place_type_enum.dart';
 
 class PlacesTb {
   static Future<void> add(Place place) async {
@@ -21,10 +22,16 @@ class PlacesTb {
     }
   }
 
-  static Future<List<Place>> getAll() async {
+  static Future<List<Place>> getAllByType(PlaceTypeEnum type) async {
     try {
       final db = await DbIni.database;
-      final maps = await db.query('places');
+
+      final maps = await db.query(
+        'places',
+        where: 'type = ?',
+        whereArgs: [type.index],
+      );
+
       return List.generate(maps.length, (i) => Place.fromMap(maps[i]));
     } catch (e) {
       throw Exception(e);
@@ -44,6 +51,7 @@ class PlacesTb {
     try {
       final db = await DbIni.database;
       final maps = await db.query('places', where: 'id = ?', whereArgs: [id]);
+
       if (maps.isNotEmpty) {
         return Place.fromMap(maps.first);
       } else {

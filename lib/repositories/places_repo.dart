@@ -17,9 +17,8 @@ class PlacesRepo {
     await PlacesTb.update(place);
   }
 
-  static Future<List<Place>> getAll(PlaceTypeEnum type) async {
-    final places = await PlacesTb.getAll();
-    return places.where((place) => place.type == type).toList();
+  static Future<List<Place>> getAllByType(PlaceTypeEnum type) async {
+    return await PlacesTb.getAllByType(type);
   }
 
   static Future<void> delete(int id) async {

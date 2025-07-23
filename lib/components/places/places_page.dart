@@ -21,7 +21,7 @@ class _PlacesPageState extends State<PlacesPage> {
 
   Future<void> _getPlaces() async {
     try {
-      final data = await PlacesRepo.getAll(widget.type);
+      final data = await PlacesRepo.getAllByType(widget.type);
       setState(() => places = data);
     } catch (e) {
       ToastUtils.showToast(
