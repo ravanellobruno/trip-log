@@ -31,6 +31,12 @@ class _PlacesPageState extends State<PlacesPage> {
     }
   }
 
+  void _remove(Place place) {
+    setState(() {
+      places.remove(place);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +66,7 @@ class _PlacesPageState extends State<PlacesPage> {
                   'onBtnPressed': (place) async {
                     try {
                       await PlacesRepo.move(widget.cards['moveTo'], place);
-                      await _getPlaces();
+                      _remove(place);
 
                       ToastUtils.showToast(
                         'Registro movido para: ${widget.cards['moveLabel']}',
@@ -73,7 +79,9 @@ class _PlacesPageState extends State<PlacesPage> {
                       );
                     }
                   },
-                  'onDeleted': _getPlaces,
+                  'onDeleted': (() {
+                    _remove(places[i]);
+                  }),
                 },
               );
             },
