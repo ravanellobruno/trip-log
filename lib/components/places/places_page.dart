@@ -19,7 +19,7 @@ class PlacesPage extends StatefulWidget {
 class _PlacesPageState extends State<PlacesPage> {
   List<Place> places = [];
 
-  Future<void> _getPlaces() async {
+  Future<void> _getAll() async {
     try {
       final data = await PlacesRepo.getAllByType(widget.type);
       setState(() => places = data);
@@ -40,7 +40,7 @@ class _PlacesPageState extends State<PlacesPage> {
   @override
   void initState() {
     super.initState();
-    _getPlaces();
+    _getAll();
   }
 
   @override
