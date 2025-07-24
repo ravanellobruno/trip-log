@@ -36,7 +36,12 @@ class _ImgPickerState extends State<ImgPicker> {
 
   Future<void> _pickImg(ImageSource source) async {
     final picker = ImagePicker();
-    final file = await picker.pickImage(source: source);
+
+    final file = await picker.pickImage(
+      source: source,
+      maxWidth: 300,
+      imageQuality: 50,
+    );
 
     if (file != null) {
       final bytes = await File(file.path).readAsBytes();
