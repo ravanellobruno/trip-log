@@ -5,7 +5,7 @@ class Schema {
       base64Img TEXT, 
       name TEXT NOT NULL, 
       description TEXT, 
-      type INTEGER 
+      type TEXT NOT NULL 
     );
   ''';
 }

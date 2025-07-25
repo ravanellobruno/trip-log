@@ -5,14 +5,14 @@ class Place {
   String name;
   String? description;
   String? base64Img;
-  PlaceTypeEnum? type;
+  PlaceTypeEnum type;
 
   Place({
     this.id,
     required this.name,
     this.description,
     this.base64Img,
-    this.type,
+    required this.type,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,7 +21,7 @@ class Place {
       'base64Img': base64Img,
       'name': name,
       'description': description!.trim().isEmpty ? null : description,
-      'type': type!.index,
+      'type': type.value,
     };
   }
 
@@ -31,7 +31,7 @@ class Place {
       base64Img: map['base64Img'],
       name: map['name'],
       description: map['description'] ?? '',
-      type: PlaceTypeEnum.values[map['type']],
+      type: PlaceTypeEnum.values.firstWhere((e) => e.value == map['type']),
     );
   }
 }

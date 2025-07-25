@@ -4,7 +4,6 @@ import '../db/places_tb.dart';
 
 class PlacesRepo {
   static Future<void> add(Place place) async {
-    place.type = PlaceTypeEnum.unvisited;
     await PlacesTb.add(place);
   }
 

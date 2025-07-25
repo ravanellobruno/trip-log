@@ -29,7 +29,7 @@ class PlacesTb {
       final maps = await db.query(
         'places',
         where: 'type = ?',
-        whereArgs: [type.index],
+        whereArgs: [type.value],
       );
 
       return List.generate(maps.length, (i) => Place.fromMap(maps[i]));

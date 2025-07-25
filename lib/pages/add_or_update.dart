@@ -8,6 +8,7 @@ import '../enums/toast_type_enum.dart';
 import '../components/form/input_text.dart';
 import '../components/form/img_picker.dart';
 import '../../repositories/places_repo.dart';
+import '../enums/place_type_enum.dart';
 
 class AddOrUpdate extends StatefulWidget {
   const AddOrUpdate({super.key});
@@ -89,6 +90,7 @@ class _AddOrUpdateState extends State<AddOrUpdate> {
               base64Img: _base64Img,
               name: _name.text,
               description: _description.text,
+              type: PlaceTypeEnum.unvisited,
             ),
           );
     } catch (e) {
